@@ -8,13 +8,13 @@
 platex template && \
 pbibtex template && \
 platex template && \
-platex template && \ # BiBTeX を使う場合、何回かコンパイルする必要がある
+platex template && \ # BibTeX を使う場合、何回かコンパイルする必要がある
 dvipdfmx template.dvi && \
 open template.pdf
 ```
 
-## BiBTeX
+## BibTeX
 
-BiBTeX は LaTeX で使える、参考文献のデータベースです
+BibTeX は LaTeX で使える、参考文献のデータベースです
 
 `reference.bib` に追記したら使えるようになります
