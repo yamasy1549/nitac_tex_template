@@ -1,0 +1,116 @@
+%%%
+% 4年 課題研究発表用レジュメ
+%%%
+
+%%%
+% 【指定書式】
+%%%
+% ・A4用紙
+% ・2段組（段間隔5mm程度）
+% ・10.5ptあるいは11pt
+% ・上下25mm、左右20mm程度
+% ・45行、文字数は標準
+%%%
+\documentclass[11pt, twocolumn]{jarticle}
+%
+\usepackage[dvipdfmx]{graphicx}
+\usepackage{bmpsize}
+\usepackage[top=2.5cm, bottom=2.5cm, left=2cm, right=2cm]{geometry}
+%
+\setlength{\columnsep}{5mm}
+%%%
+
+%%%
+% 【スタイル調整】
+%%%
+% ・タイトルの上につく余白をなくす
+% ・見出しの上下につく余白を0.5行分のサイズにする
+% ・表のキャプションの下につく余白を0.5行分のサイズにする
+% ・脚注番号の前にスターを付ける（e.g. *1）
+% ・箇条書きの行間を詰める
+% ・図のセンタリング
+% ・表のセンタリング
+% ・ハイパーリンク
+%%%
+\makeatletter
+  \renewcommand{\@maketitle}{
+    \begin{center}
+      {\huge \@title \par}
+      \vskip 1.5em
+      {\large \lineskip .5em
+        \begin{tabular}[t]{c}
+          \@author
+        \end{tabular}
+        \par
+      }
+      \vskip 1em
+      {\large \@date}
+    \end{center}
+    \par
+    \vskip 1.5em
+  }
+\makeatother
+%
+\makeatletter
+\renewcommand{\section}{
+  \@startsection{section}{1}{\z@}{0.5\Cvs}{0.5\Cvs}{\Large\bfseries}
+}
+\renewcommand{\subsection}{
+  \@startsection{subsection}{2}{\z@}{0.5\Cvs}{0.5\Cvs}{\large\bfseries}
+}
+\renewcommand{\subsubsection}{
+  \@startsection{subsubsection}{3}{\z@}{0.5\Cvs}{0.5\Cvs}{\normalsize\bfseries}
+}
+\makeatother
+%
+\usepackage{caption}
+\captionsetup[table]{skip=0.5\Cvs}
+%
+\renewcommand{\thefootnote}{*\arabic{footnote}}
+%
+\let\oldenumerate\enumerate
+\renewcommand{\enumerate}{
+  \oldenumerate
+  \setlength{\itemsep}{0pt}
+  \setlength{\parskip}{0pt}
+}
+\let\olditemize\itemize
+\renewcommand{\itemize}{
+  \olditemize
+  \setlength{\itemsep}{0pt}
+  \setlength{\parskip}{0pt}
+}
+%
+\let\oldfigure\figure
+\let\endoldfigure\endfigure
+\renewenvironment{figure}{
+  \oldfigure
+  \centering
+}{\endoldfigure}
+%
+\let\oldtable\table
+\let\endoldtable\endtable
+\renewenvironment{table}{\oldtable}{
+  \centering
+  \endoldtable
+}
+%
+\usepackage{url}
+%
+
+%%%
+% 【タイトル・ページ番号】
+%%%
+% ・日付を空にする
+% ・1ページ目のページ番号は明示的に消す必要がある（thispagestyle）
+% ・ページ番号をつけない
+%%%
+\let\oldmaketitle\maketitle
+\renewcommand{\maketitle}{
+  \date{}
+  \oldmaketitle
+}
+%
+\thispagestyle{empty}
+\pagestyle{empty}
+%%%
