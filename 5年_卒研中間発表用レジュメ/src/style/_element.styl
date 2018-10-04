@@ -1,0 +1,176 @@
+*,
+*::before,
+*::after
+  box-sizing: border-box
+
+:root
+  font: $body-font
+  line-height: $body-line-height
+  color: #000000
+
+// タイトル
+h1
+  line-height: 1.5
+  margin: 0 auto 8mm
+  font-size: 18pt
+  text-align: center
+
+  .author
+    margin-top: 3mm
+    font-size: 12pt
+
+// 見出し
+h2
+  margin: 4pt auto
+  font-size: 12pt
+  &:first-of-type
+    margin-top: 0
+
+h3
+  margin: 4pt auto
+  font-size: 10pt
+
+h4
+  margin: 4pt auto
+  font-size: 10pt
+
+h2, h3, h4, h5, h6
+  margin-block-start: unset
+  margin-block-end: unset
+  padding: 0
+  font-weight: 700
+  font-family: Kakugo
+
+// 段落
+p
+  margin: 0
+  text-align: justify
+  text-indent: 1em
+
+.right
+  text-align: right
+
+.left
+  text-align: left
+
+.center
+  text-align: center
+
+// 強調
+strong
+  font-weight: 700
+
+// リンク
+a, a:hover, a:focus, a:visited
+  color: $main-color
+
+a.ref
+  color: inherit
+  text-decoration: none
+
+// インラインソースコード
+code, kbd, pre, samp
+  font-family: $code-font-family
+
+// ブロックソースコード
+pre
+  position: relative
+  padding: 1em 0 1em .5em
+  margin: 3pt 0 3pt 0.146in
+  background-color: $code-background
+  white-space: pre
+  tab-size: 4
+  box-decoration-break: clone
+
+  margin-right: -50em
+  padding-right: 50em
+  margin-left: -49.854in
+  padding-left: 50in
+
+*:not(pre) > code
+  color: #555
+  font-weight: bold
+  margin: 0 0.2em
+  padding: 0.2em 0.3em 0.1em
+  border-radius: 0.2em
+  background-color: rgba(133, 119, 116, 0.25)
+
+// 枠囲い
+.frame
+  border: 2px solid
+  border-radius: 2px
+  padding: 1em .5em
+  font-weight: 700
+
+// 脚注
+span.footnote
+  float: footnote
+  text-align: left
+  font-weight: 400
+  font-size: 10px
+  text-indent: 0
+
+  &::footnote-call
+    vertical-align: 0.3em
+
+.column2
+  columns: 2
+  column-gap: 5mm
+
+// 表
+table
+  display: inline-block
+  border-collapse: collapse
+  th:first-child
+    text-align: right
+  tr.header
+    border-bottom: 1px solid
+    th
+      text-align: center
+  tr
+    &:first-of-type
+      border-top: 1px solid
+    &:last-of-type
+      border-bottom: 1px solid
+  th, td
+    padding-right: 4px
+    &:first-child
+      padding-left: 4px
+
+table.nostyle
+  tr
+    border-top: 0
+    border-bottom: 0
+
+// 図
+figure
+  margin: 0
+
+img
+  max-width: 100%
+
+.clearfix:before
+  content: " "
+  display: table
+  clear: both
+
+// 箇条書き
+ol, ul
+  padding-left: 3rem
+
+ol.reference
+  padding-left: 0
+
+  li
+    display: flex
+    list-style-type: none
+    list-style-position: inside
+    counter-increment: reference
+
+    &:before
+      display: marker
+      content: "[" counter(reference) "] "
+
+ol.nostyle,
+ul.nostyle
+  list-style: none

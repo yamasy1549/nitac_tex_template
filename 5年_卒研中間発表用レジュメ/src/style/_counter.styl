@@ -1,0 +1,79 @@
+// h1: chapter
+// h2: section
+// h3: subsection
+
+h1
+  counter-reset: section table figure footnote ref
+
+h2
+  counter-reset: subsection
+  counter-increment: section
+
+  &::before
+    content: counter(section)
+    font-family: Mincho
+    font-size: 12pt
+    font-weight: 700
+    line-height: 0
+    margin-right: 1rem
+
+h3
+  counter-increment: subsection
+
+  &::before
+    content: counter(section) "." counter(subsection)
+    font-family: Mincho
+    font-size: 10pt
+    font-weight: 700
+    line-height: 0
+    margin-right: 1rem
+
+h4
+  counter-increment: subsubsection
+
+  &::before
+    content: counter(section) "." counter(subsection) "." counter(subsubsection)
+    font-family: Mincho
+    font-size: 10pt
+    font-weight: 700
+    line-height: 0
+    margin-right: 1rem
+
+table caption
+  counter-increment: table
+
+  &::before
+    content: "表 " counter(table) " ："
+    margin-right: 5px
+
+figure figcaption
+  counter-increment: figure
+
+  &::before
+    content: "図 " counter(figure) " ："
+    margin-right: 5px
+
+.nocounter
+  counter-increment: none
+  &::before
+    content: ""
+    margin-right: 0
+
+  &::before
+    content: ""
+
+span.footnote
+  counter-increment: footnote
+
+  &::footnote-call
+    content: "*" counter(footnote)
+
+  &::footnote-marker
+    content: "*" counter(footnote)
+
+// 目次
+
+.reference
+  counter-increment: ref
+.ref::after
+  content: "[" target-counter(attr(href), ref) "]"

@@ -1,0 +1,20 @@
+.newpage
+  page-break-before: always
+
+@media screen
+  body
+    margin: auto 2.55in
+    overflow-x: hidden
+
+  article
+    clear: both
+
+  .header
+    margin-top: 100px
+
+h1, h2, h3, h4
+  break-after: avoid
+
+@page
+  size: $page-width $page-height
+  margin: $page-margin-top $page-margin-right $page-margin-bottom $page-margin-left

@@ -7,7 +7,7 @@
   "scripts": {
     "build": "gulp",
     "watch": "gulp watch",
-    "save":  "yarn build && savepdf -s 210mm,297mm -o output/index.pdf dest/index.html"
+    "save":  "yarn build && savepdf -s 210mm,297mm -o index.pdf dest/index.html"
   },
   "devDependencies": {
     "babel-core": "^6.10.4",
