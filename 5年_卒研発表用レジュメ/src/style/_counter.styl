@@ -1,0 +1,87 @@
+body
+  counter-reset: chapter table figure footnote ref
+
+//
+// chapter, section, subsection
+//
+h1
+  counter-reset: section
+  counter-increment: chapter
+
+  &::before
+    content: "第 " counter(chapter) " 章"
+
+h2
+  counter-reset: subsection
+  counter-increment: section
+
+  &::before
+    content: counter(chapter) "." counter(section)
+
+h3
+  counter-increment: subsection
+
+  &::before
+    content: counter(chapter) "." counter(section) "." counter(subsection)
+
+//
+// table
+//
+table caption
+  counter-increment: table
+
+  &::before
+    content: "表 " counter(table) " ："
+
+//
+// figure
+//
+figure figcaption
+  counter-increment: figure
+
+  &::before
+    content: "図 " counter(figure) " ："
+
+//
+// footnote
+//
+span.footnote
+  counter-increment: footnote
+
+  &::footnote-call
+    content: "*" counter(footnote)
+
+  &::footnote-marker
+    content: "*" counter(footnote)
+
+//
+// ref
+//
+.reference
+  counter-increment: ref
+
+.ref::after
+  content: "[" target-counter(attr(href), ref) "]"
+
+//
+// 目次
+//
+nav.toc
+  a::after
+    content: target-counter(attr(href), page)
+
+  > ol // chapterレベル
+    a::before
+      content: "第 " target-counter(attr(href), chapter) " 章"
+
+    a.nocounter ::before
+      content: ""
+
+    > li ol a::before // sectionレベル
+      content: target-counter(attr(href), chapter) "." target-counter(attr(href), section)
+
+//
+// カウントキャンセル
+//
+.nocounter
+  counter-increment: none

@@ -1,0 +1,41 @@
+.newpage
+  page-break-before: always
+
+base-page-layout($m-top, $m-bottom, $m-left, $m-right)
+  margin-top:     $m-top
+  margin-bottom:  $m-bottom
+  margin-left:    $m-left
+  margin-right:   $m-right
+  width: ($page-width - $m-left - $m-right)
+  height: ($page-height - $m-top - $m-bottom)
+  overflow: visible
+
+@media screen
+  body
+    margin: auto 2.55in
+    font-size: 10pt
+    overflow-x: hidden
+
+@page
+  size: $page-width $page-height
+  margin: $page-margin-top $page-margin-right $page-margin-bottom $page-margin-left
+
+@-epubx-page-master
+  @-epubx-partition
+    content: counter(page)
+    width: 8mm
+    height: 8mm
+    bottom: 20mm
+    left: (($page-width / 2) - 4mm)
+    font-family: Mincho
+    font-size: 11pt
+    text-align: center
+    color: #000000
+
+  @-epubx-partition chapter
+    -epubx-flow-from: body
+    base-page-layout(
+      $page-margin-top,
+      $page-margin-bottom,
+      $page-margin-left,
+      $page-margin-right)
