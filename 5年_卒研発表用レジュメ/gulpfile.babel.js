@@ -2,6 +2,7 @@
 
 import gulp            from 'gulp';
 import gulpLoadPlugins from 'gulp-load-plugins';
+import replace         from 'gulp-replace';
 import pug             from 'pug';
 import browserSync     from 'browser-sync';
 
@@ -34,6 +35,8 @@ gulp.task('pug', () =>
       pug: pug,
       pretty: true,
     }))
+    .pipe(replace(/、\s*/g, "，"))
+    .pipe(replace(/。\s*/g, "．"))
     .pipe(gulp.dest('dest/'))
 );
 

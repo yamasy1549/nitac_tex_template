@@ -7,7 +7,7 @@
   "scripts": {
     "build": "gulp",
     "watch": "gulp watch",
-    "save":  "yarn build && savepdf -s 210mm,297mm -o index.pdf dest/index.html"
+    "save": "yarn build && savepdf -s 210mm,297mm -o index.pdf dest/index.html"
   },
   "devDependencies": {
     "babel-core": "^6.10.4",
@@ -17,11 +17,13 @@
     "gulp-load-plugins": "^1.2.4",
     "gulp-plumber": "^1.1.0",
     "gulp-pug": "^3.0.3",
+    "gulp-replace": "^1.0.0",
     "gulp-sourcemaps": "^1.6.0",
     "gulp-stylus": "^2.5.0",
     "jstransformer-marked": "^1.0.1",
     "normalize.css": "^4.2.0",
     "pug": "^2.0.0-beta3",
     "viola-savepdf": "^1.2.5"
-  }
+  },
+  "dependencies": {}
 }
