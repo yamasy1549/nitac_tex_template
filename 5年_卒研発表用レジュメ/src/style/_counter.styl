@@ -57,8 +57,12 @@ span.footnote
 //
 // ref
 //
-.reference
-  counter-increment: ref
+ol.reference
+  li
+    counter-increment: ref
+
+    &:before
+      content: "[" counter(ref) "] "
 
 .ref::after
   content: "[" target-counter(attr(href), ref) "]"
