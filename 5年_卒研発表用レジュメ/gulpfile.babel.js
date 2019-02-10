@@ -18,6 +18,16 @@ pug.filters.inmath = function(str, options, locals) {
        + `</span>`;
 }
 
+pug.filters.matrix = function(str, options, locals) {
+  let _str = str.split(" ")
+  return `<span data-math-typeset="true">`
+       + `\\[ \\left( \\begin{array}{rr}`
+       + _str[0] + `&` + _str[1] + `\\\\`
+       + _str[2] + `&` + _str[3]
+       + `\\end{array} \\right) \\]`
+       + `</span>`;
+}
+
 const $ = gulpLoadPlugins();
 const plumberOpt = {
   errorHandler: function(err) {
