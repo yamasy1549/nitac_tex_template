@@ -1,0 +1,6 @@
+*.pdf
+*/src/*.pug
+*/src/assets/fonts
+*/src/assets/images
+dest/
+node_modules/
