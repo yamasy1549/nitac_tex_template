@@ -13,8 +13,6 @@ base-page-layout($m-top, $m-bottom, $m-left, $m-right)
 @media screen
   body
     margin: auto 2.55in
-    font-size: 10pt
-    overflow-x: hidden
 
 @page
   size: $page-width $page-height
@@ -22,7 +20,24 @@ base-page-layout($m-top, $m-bottom, $m-left, $m-right)
 
 @-epubx-page-master
   @-epubx-partition
-    content: counter(page)
+    -epubx-enabled: '-epubx-expr(page-number == 1)' % ()
+    content: ""
+
+  @-epubx-partition
+    -epubx-enabled: '-epubx-expr(page-number > 1 && page-number < 4)' % ()
+    content: counter(toc, lower-roman)
+    width: 8mm
+    height: 8mm
+    bottom: 20mm
+    left: (($page-width / 2) - 4mm)
+    font-family: Mincho
+    font-size: 11pt
+    text-align: center
+    color: #000000
+
+  @-epubx-partition
+    -epubx-enabled: '-epubx-expr(page-number > 3)' % ()
+    content: counter(p)
     width: 8mm
     height: 8mm
     bottom: 20mm

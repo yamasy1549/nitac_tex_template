@@ -1,15 +1,24 @@
 body
-  counter-reset: chapter table figure footnote ref
+  counter-reset: chapter table figure footnote list ref
+
+@page
+  counter-increment: toc p
+
+  &:first
+    counter-reset: toc -1 p -3
 
 //
 // chapter, section, subsection
 //
 h1
-  counter-reset: section
+  counter-reset: section table figure
   counter-increment: chapter
 
   &::before
     content: "第 " counter(chapter) " 章"
+
+.h1::after
+  content: target-counter(attr(href), chapter) " 章"
 
 h2
   counter-reset: subsection
@@ -18,29 +27,41 @@ h2
   &::before
     content: counter(chapter) "." counter(section)
 
+.h2::after
+  content: target-counter(attr(href), chapter) "." target-counter(attr(href), section) " 節"
+
 h3
   counter-increment: subsection
 
   &::before
     content: counter(chapter) "." counter(section) "." counter(subsection)
 
+.h3::after
+  content: target-counter(attr(href), chapter) "." target-counter(attr(href), section)  "." target-counter(attr(href), subsection) " 項"
+
 //
 // table
 //
-table caption
+table caption, .caption
   counter-increment: table
 
   &::before
-    content: "表 " counter(table)
+    content: "表 " counter(chapter) "." counter(table)
+
+.table::after
+  content: "表 " target-counter(attr(href), chapter) "." target-counter(attr(href), table) " "
 
 //
 // figure
 //
-figure figcaption
+figure figcaption, .figcaption
   counter-increment: figure
 
   &::before
-    content: "図 " counter(figure)
+    content: "図 " counter(chapter) "." counter(figure)
+
+.figure::after
+  content: "図 " target-counter(attr(href), chapter) "." target-counter(attr(href), figure) " "
 
 //
 // footnote
@@ -68,11 +89,21 @@ ol.reference
   content: "[" target-counter(attr(href), ref) "]"
 
 //
+// list
+//
+ol.number
+  li
+    counter-increment: list
+
+    &:before
+      content: "(" counter(list) ")"
+
+//
 // 目次
 //
 nav.toc
   a::after
-    content: target-counter(attr(href), page)
+    content: target-counter(attr(href), p)
 
   > ol // chapterレベル
     a::before
@@ -81,8 +112,13 @@ nav.toc
     a.nocounter ::before
       content: ""
 
-    > li ol a::before // sectionレベル
-      content: target-counter(attr(href), chapter) "." target-counter(attr(href), section)
+    > li ol
+      a::before // sectionレベル
+        content: target-counter(attr(href), chapter) "." target-counter(attr(href), section)
+
+      > li ol
+        a::before // subsectionレベル
+          content: target-counter(attr(href), chapter) "." target-counter(attr(href), section) "." target-counter(attr(href), subsection)
 
 //
 // カウントキャンセル
