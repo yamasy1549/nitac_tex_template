@@ -46,7 +46,7 @@ gulp.task('pug', () =>
     .pipe(replace(/、\s*/g, "，"))
     .pipe(replace(/。\s*/g, "．"))
     .pipe(gulp.dest('dest/'))
-    );
+);
 
 gulp.task('assets', () =>
   gulp.src('src/assets/**/*')
@@ -65,7 +65,7 @@ gulp.task('stylus', () =>
     .pipe(browserSync.reload({
       stream: true,
     }))
-  );
+);
 
 gulp.task('browsersync', () => {
   browserSync({
