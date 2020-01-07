@@ -36,8 +36,6 @@ const plumberOpt = {
   },
 }
 
-gulp.task('default', ['pug', 'assets', 'stylus']);
-
 gulp.task('pug', () =>
   gulp.src(['src/**.pug', '!src/_**.pug'])
     .pipe($.plumber(plumberOpt))
@@ -48,7 +46,7 @@ gulp.task('pug', () =>
     .pipe(replace(/、\s*/g, "，"))
     .pipe(replace(/。\s*/g, "．"))
     .pipe(gulp.dest('dest/'))
-);
+    );
 
 gulp.task('assets', () =>
   gulp.src('src/assets/**/*')
@@ -67,7 +65,7 @@ gulp.task('stylus', () =>
     .pipe(browserSync.reload({
       stream: true,
     }))
-);
+  );
 
 gulp.task('browsersync', () => {
   browserSync({
@@ -83,10 +81,12 @@ gulp.task('bs-reload', () => {
   browserSync.reload();
 })
 
-gulp.task('watch', ['default', 'browsersync'], () => {
-  gulp.watch('src/**/*.pug', ['pug']);
-  gulp.watch('src/assets/**/*', ['assets']);
-  gulp.watch('src/style/**/*.styl', ['stylus']);
-  gulp.watch('dest/*.css', ['bs-reload']);
-  gulp.watch('dest/*.html', ['bs-reload']);
-});
+gulp.task('default', gulp.series('pug', 'assets', 'stylus'));
+
+gulp.task('watch',  gulp.series('default', 'browsersync', function() {
+  gulp.watch('src/**/*.pug', gulp.task('pug'));
+  gulp.watch('src/assets/**/*', gulp.task('assets'));
+  gulp.watch('src/style/**/*.styl', gulp.task('stylus'));
+  gulp.watch('dest/*.css', gulp.task('bs-reload'));
+  gulp.watch('dest/*.html', gulp.task('bs-reload'));
+}));
