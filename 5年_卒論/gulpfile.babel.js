@@ -72,6 +72,12 @@ gulp.task('browsersync', () => {
     server: {
       baseDir: 'dest/',
       index: 'index.html',
+      middleware: [
+        function(req, res, next) {
+          res.setHeader('Access-Control-Allow-Origin', '*');
+          next();
+        }
+      ]
     },
     open: false,
   });
@@ -81,9 +87,9 @@ gulp.task('bs-reload', () => {
   browserSync.reload();
 })
 
-gulp.task('default', gulp.series('pug', 'assets', 'stylus'));
+gulp.task('default', gulp.parallel('pug', 'assets', 'stylus'));
 
-gulp.task('watch',  gulp.series('default', 'browsersync', function() {
+gulp.task('watch',  gulp.parallel('default', 'browsersync', function() {
   gulp.watch('src/**/*.pug', gulp.task('pug'));
   gulp.watch('src/assets/**/*', gulp.task('assets'));
   gulp.watch('src/style/**/*.styl', gulp.task('stylus'));
