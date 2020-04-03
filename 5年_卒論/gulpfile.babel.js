@@ -36,8 +36,6 @@ const plumberOpt = {
   },
 }
 
-gulp.task('default', ['pug', 'assets', 'stylus']);
-
 gulp.task('pug', () =>
   gulp.src(['src/**.pug', '!src/_**.pug'])
     .pipe($.plumber(plumberOpt))
@@ -74,6 +72,12 @@ gulp.task('browsersync', () => {
     server: {
       baseDir: 'dest/',
       index: 'index.html',
+      middleware: [
+        function(req, res, next) {
+          res.setHeader('Access-Control-Allow-Origin', '*');
+          next();
+        }
+      ]
     },
     open: false,
   });
@@ -83,10 +87,12 @@ gulp.task('bs-reload', () => {
   browserSync.reload();
 })
 
-gulp.task('watch', ['default', 'browsersync'], () => {
-  gulp.watch('src/**/*.pug', ['pug']);
-  gulp.watch('src/assets/**/*', ['assets']);
-  gulp.watch('src/style/**/*.styl', ['stylus']);
-  gulp.watch('dest/*.css', ['bs-reload']);
-  gulp.watch('dest/*.html', ['bs-reload']);
-});
+gulp.task('default', gulp.parallel('pug', 'assets', 'stylus'));
+
+gulp.task('watch',  gulp.parallel('default', 'browsersync', function() {
+  gulp.watch('src/**/*.pug', gulp.task('pug'));
+  gulp.watch('src/assets/**/*', gulp.task('assets'));
+  gulp.watch('src/style/**/*.styl', gulp.task('stylus'));
+  gulp.watch('dest/*.css', gulp.task('bs-reload'));
+  gulp.watch('dest/*.html', gulp.task('bs-reload'));
+}));
