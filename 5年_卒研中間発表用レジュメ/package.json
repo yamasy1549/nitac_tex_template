@@ -21,7 +21,7 @@
     "gulp-stylus": "^2.5.0",
     "jstransformer-marked": "^1.0.1",
     "normalize.css": "^4.2.0",
-    "pug": "^2.0.0-beta3",
+    "pug": "^3.0.1",
     "viola-savepdf": "^1.2.5"
   }
 }
